@@ -1,6 +1,10 @@
 const chatWindow = document.getElementById("chat-window");
 const inputPanel = document.getElementById("input-panel");
 const startBtn = document.getElementById("start-check-btn");
+const overlay = document.getElementById("rupa-overlay");
+const closeBtn = document.getElementById("close-rupa-btn");
+const freeChatInput = document.getElementById("free-chat-input");
+const freeChatSendBtn = document.getElementById("free-chat-send-btn");
 
 const state = {
   step: "idle",
@@ -82,13 +86,16 @@ function buildInitialInputsStep() {
     </div>
 
     <div class="field-group">
-      <label class="field-label" for="property-value">
+      <label class="field-label" for="property-input">
         <span>Property value (approx.)</span>
       </label>
-      <div class="range-row">
-        <input id="property-value-range" type="range" min="2000000" max="20000000" step="100000" value="7500000" />
-        <output id="property-value-output">${formatCurrency(7500000)}</output>
-      </div>
+      <input
+        id="property-input"
+        type="number"
+        inputmode="decimal"
+        class="text-input"
+        placeholder="e.g. 75,00,000"
+      />
     </div>
 
     <div class="field-group">
@@ -104,7 +111,7 @@ function buildInitialInputsStep() {
       </div>
       <div class="range-row">
         <input id="emi-range" type="range" min="10000" max="150000" step="5000" value="30000" />
-        <output id="emi-output">${formatCurrency(30000)}</output>
+        <output id="emi-output" class="range-output-strong">${formatCurrency(30000)}</output>
       </div>
     </div>
 
@@ -114,14 +121,9 @@ function buildInitialInputsStep() {
     </div>
   `);
 
-  const pvRange = document.getElementById("property-value-range");
-  const pvOut = document.getElementById("property-value-output");
+  const pvInput = document.getElementById("property-input");
   const emiRange = document.getElementById("emi-range");
   const emiOut = document.getElementById("emi-output");
-
-  pvRange.addEventListener("input", () => {
-    pvOut.textContent = formatCurrency(pvRange.value);
-  });
   emiRange.addEventListener("input", () => {
     emiOut.textContent = formatCurrency(emiRange.value);
   });
@@ -139,7 +141,8 @@ function buildInitialInputsStep() {
 }
 
 function handleInitialContinue() {
-  const pvVal = Number(document.getElementById("property-value-range").value || 0);
+  const pvInput = document.getElementById("property-input");
+  const pvVal = pvInput ? Number(pvInput.value || 0) : 0;
   const incomeVal = Number(document.getElementById("income-input").value || 0);
   const emiSlider = document.getElementById("emi-range");
   const emiVal = emiSlider.value ? Number(emiSlider.value) : null;
@@ -205,10 +208,6 @@ function showSoftEligibility() {
   );
 
   setPanelContent(`
-    <div class="panel-header">
-      <span class="panel-dot"></span>
-      What would you like to explore next?
-    </div>
     <div class="quick-actions">
       <button class="chip-btn" id="qa-future">
         <span class="dot"></span> Predict my future finances
@@ -670,13 +669,49 @@ function buildFinalAction() {
   });
 }
 
-startBtn.addEventListener("click", () => {
+function openRupaOverlay() {
+  if (!overlay) return;
+  overlay.classList.remove("is-hidden");
   if (state.step === "idle") {
     buildInitialInputsStep();
-    startBtn.disabled = true;
-  } else {
-    document.querySelector(".chat-shell").scrollIntoView({ behavior: "smooth" });
   }
-});
+}
 
-buildInitialInputsStep();
+function closeRupaOverlay() {
+  if (!overlay) return;
+  overlay.classList.add("is-hidden");
+}
+
+if (startBtn) {
+  startBtn.addEventListener("click", () => {
+    openRupaOverlay();
+  });
+}
+
+if (closeBtn) {
+  closeBtn.addEventListener("click", () => {
+    closeRupaOverlay();
+  });
+}
+
+function handleFreeChatSend() {
+  const text = (freeChatInput && freeChatInput.value ? freeChatInput.value : "").trim();
+  if (!text) return;
+  addUserMessage(text);
+  if (freeChatInput) {
+    freeChatInput.value = "";
+  }
+}
+
+if (freeChatSendBtn) {
+  freeChatSendBtn.addEventListener("click", handleFreeChatSend);
+}
+if (freeChatInput) {
+  freeChatInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      handleFreeChatSend();
+    }
+  });
+}
+
