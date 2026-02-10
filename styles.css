@@ -437,6 +437,19 @@ input[type="range"]::-moz-range-thumb {
   margin-top: 4px;
 }
 
+.quick-actions.loan-actions {
+  justify-content: flex-start;
+  margin-top: 10px;
+}
+
+.quick-actions.loan-actions .chip-btn {
+  background: #fdf2ff;
+  border-color: var(--accent);
+  color: var(--accent);
+  font-weight: 600;
+  box-shadow: 0 6px 16px rgba(151, 20, 77, 0.15);
+}
+
 .chip-btn {
   border-radius: var(--radius-pill);
   padding: 6px 11px;

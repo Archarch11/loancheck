@@ -207,7 +207,8 @@ function showSoftEligibility() {
     }
   );
 
-  setPanelContent(`
+  // Render quick‑action pills directly on the background (no white panel)
+  inputPanel.innerHTML = `
     <div class="quick-actions">
       <button class="chip-btn" id="qa-future">
         <span class="dot"></span> Predict my future finances
@@ -216,7 +217,7 @@ function showSoftEligibility() {
         <span class="dot"></span> Stress test my finances
       </button>
     </div>
-  `);
+  `;
 
   document.getElementById("qa-future").addEventListener("click", () => {
     addUserMessage("Predict my future finances");
@@ -409,7 +410,7 @@ function buildLoanOptions() {
     <div class="loan-card-grid">
       ${cardsHtml}
     </div>
-    <div class="quick-actions">
+    <div class="quick-actions loan-actions">
       <button class="chip-btn" id="qa-stress-options">
         <span class="dot"></span> Stress test my options
       </button>
