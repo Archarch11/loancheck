@@ -12,27 +12,123 @@
   </head>
   <body>
     <div class="page">
-      <header class="top-banner">
-        <div class="banner-text">
-          <div class="banner-heading">Is this home loan right for your future?</div>
-          <div class="banner-subtext">
-            Discover how your loan stands up to future changes, before you commit.
-          </div>
-        </div>
-        <button class="primary-btn banner-cta" id="start-check-btn">
-          Check My Future Stability
-        </button>
+      <header class="bank-header">
+        <div class="bank-logo">YourBank</div>
       </header>
 
-      <main class="chat-shell" aria-label="Future Stability Check with Rupa">
-        <section class="chat-window" id="chat-window">
-          <!-- Chat bubbles will be injected here -->
+      <main class="bank-main" aria-label="Home loan overview">
+        <section class="top-banner">
+          <div class="banner-text">
+            <div class="banner-heading">
+              Is this home loan right for your future?
+            </div>
+            <div class="banner-subtext">
+              Discover how your loan stands up to future changes, before you commit.
+            </div>
+          </div>
+          <button class="primary-btn banner-cta" id="start-check-btn" type="button">
+            Check My Future Stability
+          </button>
         </section>
 
-        <section class="input-panel" id="input-panel">
-          <!-- Dynamic controls will be injected here -->
+        <!-- Placeholder banking content below the banner -->
+        <section class="bank-section">
+          <h2 class="section-heading">Home loans that adapt with you</h2>
+          <p class="section-copy">
+            Explore flexible repayment options, competitive rates and guidance designed
+            to support your life decisions, not just today’s eligibility.
+          </p>
+        </section>
+
+        <!-- Additional banking banners to feel like a full site -->
+        <section class="bank-section bank-section-soft">
+          <p class="section-eyebrow">For first‑time buyers</p>
+          <h2 class="section-heading">Start with a comfortable EMI, not the maximum you can stretch to.</h2>
+          <p class="section-copy">
+            Use Future Stability Check with Rupa to see how your loan might feel if income or expenses change.
+          </p>
+          <div class="section-chip-row">
+            <button class="chip-btn">
+              <span class="dot"></span> Explore home loan offers
+            </button>
+            <button class="chip-btn">
+              <span class="dot"></span> Check latest interest rates
+            </button>
+          </div>
+        </section>
+
+        <section class="bank-section bank-section-grid">
+          <h2 class="section-heading">Apply now</h2>
+          <div class="product-grid">
+            <article class="product-card">
+              <div class="product-icon">🏠</div>
+              <div class="product-title">Home loan</div>
+              <div class="product-sub">Buy, build or renovate</div>
+            </article>
+            <article class="product-card">
+              <div class="product-icon">💳</div>
+              <div class="product-title">Credit card</div>
+              <div class="product-sub">Rewards & cashbacks</div>
+            </article>
+            <article class="product-card">
+              <div class="product-icon">💰</div>
+              <div class="product-title">Savings</div>
+              <div class="product-sub">Zero balance options</div>
+            </article>
+            <article class="product-card">
+              <div class="product-icon">📦</div>
+              <div class="product-title">Personal loan</div>
+              <div class="product-sub">For planned expenses</div>
+            </article>
+          </div>
         </section>
       </main>
+
+      <!-- Rupa overlay: appears on top of the banking page -->
+      <section
+        class="rupa-overlay is-hidden"
+        id="rupa-overlay"
+        aria-label="Future Stability Check with Rupa"
+      >
+        <div class="chat-shell">
+          <header class="chat-header">
+            <button
+              class="icon-btn chat-close-btn"
+              id="close-rupa-btn"
+              type="button"
+              aria-label="Close and go back"
+            >
+              ✕
+            </button>
+            <div class="chat-header-text">
+              <div class="chat-header-title">Future Stability Check</div>
+              <div class="chat-header-subtitle">With Rupa, your home loan guide</div>
+            </div>
+          </header>
+
+          <div class="chat-body" id="chat-body">
+            <section class="chat-window" id="chat-window">
+              <!-- Chat bubbles will be injected here -->
+            </section>
+
+            <section class="input-panel" id="input-panel">
+              <!-- Dynamic controls will be injected here (sliders, options, etc.) -->
+            </section>
+          </div>
+
+          <section class="chat-bar" aria-label="Send a message to Rupa">
+            <input
+              id="free-chat-input"
+              class="chat-text-input"
+              type="text"
+              placeholder="Type a message to Rupa (optional)…"
+            />
+            <button class="chat-send-btn" id="free-chat-send-btn" type="button">
+              Send
+            </button>
+          </section>
+        </div>
+      </section>
     </div>
 
     <script src="./app.js"></script>
